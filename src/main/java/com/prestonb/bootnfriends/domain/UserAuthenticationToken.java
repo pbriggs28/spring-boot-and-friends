@@ -1,15 +1,20 @@
 package com.prestonb.bootnfriends.domain;
 
-public class User {
+import org.hibernate.validator.constraints.NotBlank;
 
+public class UserAuthenticationToken {
+	@NotBlank(message = "Username must not be empty.")
 	private String username;
+	@NotBlank(message = "Password must not be empty.")
 	private String password;
 
-	public User() {
+	public UserAuthenticationToken() {
+		
 	}
 	
-	public User(String username) {
+	public UserAuthenticationToken(String username, String password) {
 		this.username = username;
+		this.password = password;
 	}
 	
 	public String getUsername() {
@@ -24,15 +29,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	// Be sure to mask password if regenerating this
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [username=");
+		builder.append("UserAuthenticationToken [username=");
 		builder.append(username);
+		builder.append(", password=");
+		builder.append("***MASKED***");
 		builder.append("]");
 		return builder.toString();
 	}
-
-	
 }
