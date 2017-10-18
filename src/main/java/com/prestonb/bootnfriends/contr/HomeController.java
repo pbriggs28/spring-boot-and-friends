@@ -20,10 +20,10 @@ import com.prestonb.bootnfriends.svc.UserService;
 		
 		@Autowired private UserService userService;
 	
-		@RequestMapping(method = RequestMethod.GET)
-		public String redirectToLoginMapping() {
-			return "redirect:/login";
-		}
+//		@RequestMapping(method = RequestMethod.GET)
+//		public String redirectToLoginMapping() {
+//			return "redirect:/login";
+//		}
 	
 		@RequestMapping(path = "/login", method = RequestMethod.GET)
 		public String loginPageGET(ModelMap model) {
