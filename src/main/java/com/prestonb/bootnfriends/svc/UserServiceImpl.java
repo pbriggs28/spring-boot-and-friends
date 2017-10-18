@@ -20,4 +20,16 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 	
+	@PostConstruct
+	public void init() {
+//		This will get called after all beans are instantiated.
+//		All @Autowired variables are available and safe	to access.
+	}
+	
+	@PreDestroy
+	public void tearDown() {
+//		This will get called when the container is shutting down.
+//		Close any connections/IO here.
+	}
+
 }
