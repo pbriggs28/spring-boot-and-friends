@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.prestonb.bootnfriends.domain.User;
 import com.prestonb.bootnfriends.domain.UserAuthenticationToken;
+import com.prestonb.bootnfriends.ex.UserAuthenticationFailedException;
+import com.prestonb.bootnfriends.ex.UserNotFoundException;
 import com.prestonb.bootnfriends.svc.UserService;
 
 	@Controller
@@ -42,8 +44,10 @@ import com.prestonb.bootnfriends.svc.UserService;
 				return "login";
 			
 			// Check for invalid credentials
-			User user = userService.authenticate(token);
-			if(user == null) {
+			User user;
+			try {
+				user = userService.authenticate(token);
+			} catch (UserNotFoundException | UserAuthenticationFailedException e) {
 				model.addAttribute("errMsg", "The username and/or password is invalid");
 				return "login";
 			}
