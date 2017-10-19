@@ -1,12 +1,22 @@
 package com.prestonb.bootnfriends.conf;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+	@Validated
 	@Component
 	@ConfigurationProperties(prefix="com.prestonb")
 	public class ApplicationProperties {
-		
+
+		@NotNull(message = "Must set the max number of retries.")
+		@Max(value = 10, message = "Max number of retries is 10")
+		@Min(value = 0, message = "Max number of retries must be positive")
+		private Integer maxNumRetries;
 		
 		/** Ignore the case of the username when attempting authentication. */
 		private Boolean ignoreUsernameCase = true;
@@ -19,7 +29,6 @@ import org.springframework.stereotype.Component;
 		 * NOTE: This will be ignored in any non-local environment. 
 		 */
 		private Boolean disableCsrf;
-		private int maxNumRetries;
 		
 		// Getter/setters
 		
@@ -41,10 +50,10 @@ import org.springframework.stereotype.Component;
 		public void setDisableCsrf(Boolean disableCsrf) {
 			this.disableCsrf = disableCsrf;
 		}
-		public int getMaxNumRetries() {
+		public Integer getMaxNumRetries() {
 			return maxNumRetries;
 		}
-		public void setMaxNumRetries(int maxNumRetries) {
+		public void setMaxNumRetries(Integer maxNumRetries) {
 			this.maxNumRetries = maxNumRetries;
 		}
 		
