@@ -15,7 +15,15 @@ import com.prestonb.bootnfriends.svc.UserService;
 	
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-			User user1 = userService.findUser("prestonb");
-			System.out.println(user1);
+			
+			User user1 = new User("prestonb");
+			System.out.println("Created user: \t" + user1);
+			
+			User updatedUser = userService.createUser(user1);
+			System.out.println("Saved user: \t" + updatedUser);
+			
+			User sameUser = userService.findUser(updatedUser.getId());
+			
+			System.out.println("Found user: \t" + sameUser);
 		}
 	}
